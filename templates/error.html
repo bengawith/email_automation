@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Error Occurred{% endblock %}
+{% block content %}
+<div class="container-custom text-center">
+  <h1>An Error Occurred</h1>
+  <p class="text-danger"><strong>Error:</strong> {{ error }}</p>
+  <h5>Traceback:</h5>
+  <pre style="text-align: left; background: #f8f9fa; padding: 15px; border-radius: 5px;">{{ traceback }}</pre>
+  <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Go Back</a>
+</div>
+{% endblock %}

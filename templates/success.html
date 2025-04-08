@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Success{% endblock %}
+{% block content %}
+<div class="container-custom text-center">
+  <h1>Success!</h1>
+  <p>Emails have been sent successfully.</p>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Go Back</a>
+</div>
+{% endblock %}
