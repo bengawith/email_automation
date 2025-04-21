@@ -59,8 +59,19 @@ html, body {
 }
 
 #login-container {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 20px;
   border-radius: 10px;
+  background-image: linear-gradient(
+    45deg,
+    rgba(7, 57, 84, 0.6), rgba(231, 168, 36, 0.6), rgba(172, 202, 216, 0.6), rgba(222, 184, 233, 0.6), rgba(7, 57, 84, 0.6), rgba(231, 168, 36, 0.6), rgba(172, 202, 216, 0.6), rgba(222, 184, 233, 0.6),
+    rgba(7, 57, 84, 0.6), rgba(231, 168, 36, 0.6), rgba(172, 202, 216, 0.6), rgba(222, 184, 233, 0.6), rgba(7, 57, 84, 0.6), rgba(231, 168, 36, 0.6), rgba(172, 202, 216, 0.6), rgba(222, 184, 233, 0.6)
+
+  );
+  background-size: 1000% auto;
+  background-repeat: repeat;
   color: #ffffff;
   width: 100%;
   max-width: 600px;
@@ -70,9 +81,9 @@ html, body {
 }
 
 #login-container:hover {
-  background-color: rgba(48, 102, 62, 0.8);
   transform: scale(1.05);
   transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+  animation: colourFlow 24s linear infinite, colourGlow 20s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite, transform 0.3s ease-in-out;
 }
 
 .hover-grad-txt {
@@ -80,8 +91,9 @@ html, body {
   text-align: center;
   background-image: linear-gradient(
     to right,
-    red, orange, yellow, green, blue, indigo, violet,
-    red, orange, yellow, green, blue, indigo, violet
+    #073954, #E7A824, #ACCAD8, #DEB8E9, #073954, #E7A824, #ACCAD8, #DEB8E9,
+    #073954, #E7A824, #ACCAD8, #DEB8E9, #073954, #E7A824, #ACCAD8, #DEB8E9
+
   );
   background-size: 1000% auto;
   background-repeat: repeat;
@@ -89,46 +101,47 @@ html, body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  animation: rainbowFlow 8s linear infinite;
+  animation: colourFlow 20s linear infinite;
   transition: transform 0.3s ease-in-out;
 }
 
 /* Scale on hover */
 .hover-grad-txt:hover {
-  animation: rainbowFlow 8s linear infinite, rainbowGlow 4s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
+  transform: scale(1.1);
+  animation: colourFlow 8s linear infinite, colourGlow 4s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite, transform 0.3s ease-in-out;
 }
 
 
-/* Rainbow scroll */
-@keyframes rainbowFlow {
+/* Colour scroll */
+@keyframes colourFlow {
   0%   { background-position: 0% 50%; }
   100% { background-position: 100% 50%; }
 }
 
-/* Rainbow pulse glow */
-@keyframes rainbowGlow {
+/* Colour pulse glow */
+@keyframes colourGlow {
   0% {
-    text-shadow: 0 0 5px red;
+    text-shadow: 0 0 5px #073954;
   }
   14% {
-    text-shadow: 0 0 10px orange;
+    text-shadow: 0 0 10px #E7A824;
   }
   28% {
-    text-shadow: 0 0 10px yellow;
+    text-shadow: 0 0 10px #ACCAD8;
   }
   42% {
-    text-shadow: 0 0 10px limegreen;
+    text-shadow: 0 0 10px #DEB8E9;
   }
   57% {
-    text-shadow: 0 0 10px deepskyblue;
+    text-shadow: 0 0 10px #073954;
   }
   71% {
-    text-shadow: 0 0 10px blue;
+    text-shadow: 0 0 10px #E7A824;
   }
   85% {
-    text-shadow: 0 0 10px indigo;
+    text-shadow: 0 0 10px #ACCAD8;
   }
   100% {
-    text-shadow: 0 0 10px violet;
+    text-shadow: 0 0 10px #DEB8E9;
   }
 }
