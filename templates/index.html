@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Login to Send Sales Summary{% endblock %}
 {% block content %}
-<div class="container-custom text-center">
+<div class="container-custom text-center" id="login-container">
   <h1>Send Sales Summary</h1>
   <p>Click below to log in and send your sales summary emails.</p>
   <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg mt-3">Log In</a>

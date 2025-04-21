@@ -1,7 +1,6 @@
-from flask import Flask, session, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template
 from flask_session import Session
 from flask_wtf.csrf import CSRFProtect
-import time
 import logging
 
 from config import Config
