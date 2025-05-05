@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Preview Email{% endblock %}
 {% block content %}
-<div class="container-custom">
+<div class="container-custom" id="preview-email-container">
   <h1 class="text-center mb-4">Preview Email</h1>
   <div class="card mb-4">
     <div class="card-header">
@@ -13,11 +13,15 @@
     </div>
   </div>
   <div class="d-flex justify-content-between">
-    <form action="{{ url_for('email.send_email') }}" method="post">
-      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-      <button type="submit" class="btn btn-primary">Send Emails</button>
+    <form action="{{ url_for('email.send_email') }}" method="post" id="emailForm">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit" id="sendButton" class="btn btn-primary">Send Emails</button>
     </form>
+    <div id="loading" style="display:none; margin-top: 10px; font-weight: bold;">Sending emails... Please wait.</div>
     <a href="{{ url_for('email.email_form') }}" class="btn btn-secondary">Edit Email</a>
   </div>
 </div>
+
+<!-- Include JavaScript for button behavior -->
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 {% endblock %}

@@ -18,6 +18,5 @@ class Config:
     CLIENT_SECRET = os.getenv("CLIENT_SECRET")
     TENANT_ID = os.getenv("TENANT_ID")
     REDIRECT_URI = os.getenv("REDIRECT_URI", "http://localhost:5000/authorized")
-    #REDIRECT_URI = os.getenv("REDIRECT_URI", "https://mm-sales-summary.onrender.com/authorized")
     MSAL_SCOPE = ["Mail.Send"]
     SIGNATURE_TEXT = os.getenv("SIGNATURE_TEXT")

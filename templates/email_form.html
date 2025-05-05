@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block title %}Send Sales Summary{% endblock %}
 {% block content %}
-<div class="container-custom">
+<div class="container-custom" id="email-form-container">
   <h1 class="text-center mb-4">Send Sales Summary</h1>
   <form action="{{ url_for('email.preview_email') }}" method="post" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
     <div class="mb-3">
       <label for="contacts_file" class="form-label">Contacts CSV:</label>
-      <input type="file" class="form-control" id="contacts_file" name="contacts_file" required>
+      <input className="form-control" type="file" class="form-control" id="contacts_file" name="contacts_file" required>
     </div>
     <div class="mb-3">
       <label for="vendor_sales_file" class="form-label">Vendor Sales CSV:</label>
-      <input type="file" class="form-control" id="vendor_sales_file" name="vendor_sales_file" required>
+      <input className="form-control" type="file" class="form-control" id="vendor_sales_file" name="vendor_sales_file" required>
     </div>
     <div class="mb-3">
       <label for="custom_message" class="form-label">Custom Message:</label>
       <textarea class="form-control" id="custom_message" name="custom_message" rows="5" required></textarea>
     </div>
     <div class="text-center">
-      <button type="submit" class="btn btn-success">Preview Email</button>
+      <button className="btn btn-success" type="submit" class="btn btn-success">Preview Email</button>
     </div>
   </form>
 </div>

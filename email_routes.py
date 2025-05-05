@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session, current_app
+from flask import Blueprint, render_template, request, redirect, url_for, session, current_app, jsonify
 import pandas as pd
 from io import StringIO
 import time
@@ -90,26 +90,37 @@ def send_email():
         if not token:
             return redirect(url_for("auth.login"))
 
+        failed_emails = []
+
         for _, contact in filtered_contacts.iterrows():
             vendor_name = contact['*ContactName'].strip()
             to_address = contact['EmailAddress'].strip()
 
             vendor_sales = vendor_sales_df[vendor_sales_df['Vendor Name'].str.strip() == vendor_name]
-
+            
             if vendor_sales.empty:
                 current_app.logger.info("Empty sales CSV for vendor %s", vendor_name.replace('*', ''))
                 continue
-
+            
             if not to_address:
                 current_app.logger.info("No email found for contact: %s", contact)
+                failed_emails.append(f"{vendor_name} (Missing email)")
                 continue
 
             email_content = generate_email_content(vendor_name, vendor_sales, custom_message)
             success = send_graph_api_email(to_address, "Your Monthly Sales Summary", email_content, token)
             if not success:
                 current_app.logger.error("Failed to send email to %s", to_address)
+                failed_emails.append(f"{vendor_name} ({to_address})")
+                return jsonify({"status": "error", "message": f"Failed to send email to {to_address}"}), 500
 
-        return render_template("success.html")
+        return jsonify({"status": "success", "redirect": url_for("email.success"), "failed_emails": failed_emails})
     except Exception as e:
         current_app.logger.error("Error in send_email: %s", e, exc_info=True)
-        return f"An error occurred: {e}", 500
+        return jsonify({"status": "error", "message": str(e)}), 500
+
+
+@email_bp.route("/success")
+@token_required
+def success():
+    return render_template("success.html")

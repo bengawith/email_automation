@@ -2,8 +2,55 @@
 {% block title %}Success{% endblock %}
 {% block content %}
 <div class="container-custom text-center">
-  <h1>Success!</h1>
+  <h1 class="mb-4">Success! 🎉</h1>
   <p>Emails have been sent successfully.</p>
-  <a href="{{ url_for('index') }}" class="btn btn-primary">Go Back</a>
+
+  <!-- Confetti Effect -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script>
+      function fireConfetti() {
+          const screenWidth = window.innerWidth;
+          
+          // Increase particle count for larger screens
+          const particleCount = screenWidth > 1200 ? 250 : 150;
+  
+          // Create multiple bursts across the screen
+          confetti({
+              particleCount: particleCount,
+              spread: 120,  // Wider spread for full coverage
+              origin: { x: 0.1, y: 0.6 }
+          });
+  
+          confetti({
+              particleCount: particleCount,
+              spread: 120,
+              origin: { x: 0.5, y: 0.6 }
+          });
+  
+          confetti({
+              particleCount: particleCount,
+              spread: 120,
+              origin: { x: 0.9, y: 0.6 }
+          });
+      }
+  
+      document.addEventListener("DOMContentLoaded", fireConfetti);
+  </script>
+
+  <!-- Show failed emails if any -->
+  {% if failed_emails %}
+  <div class="alert alert-warning mt-4">
+      <strong>Some emails failed to send:</strong>
+      <ul class="list-unstyled">
+        {% for email in failed_emails %}
+          <li>❌ {{ email }}</li>
+        {% endfor %}
+      </ul>
+  </div>
+  {% endif %}
+
+  <!-- Button to go back -->
+  <a href="{{ url_for('index') }}" class="btn btn-primary mt-4">Go Back</a>
 </div>
 {% endblock %}
